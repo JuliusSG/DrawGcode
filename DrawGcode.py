@@ -139,8 +139,8 @@ def file_reader(filename):
             ax.add_patch(pac)
             x = tx
             y = ty
-    plt.xlim(0, 390)
-    plt.ylim(0, 310)
+    plt.xlim(0, 390)    #the maximum x-dimensions 
+    plt.ylim(0, 310)    #the maximum y-dimensions 
     plt.axes().set_aspect("equal")
     plt.show()
 
