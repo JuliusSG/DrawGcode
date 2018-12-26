@@ -11,7 +11,7 @@ plt.rcParams['toolbar'] = 'None'  # remove stock matplotlib toolbar
 
 # Author and information
 def print_startup_message():
-    print("DrawGcode by Marcus Voß\ncompiled at:\nfreezed with PyInstaller")
+    print("DrawGcode by Marcus Voß\nhttps://git.io/fhTYj\n")
     print("--------------------------------------------")
 
 
