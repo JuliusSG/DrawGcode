@@ -6,7 +6,7 @@ Since it is written for use with a plotter only 2D G-codes are supported. The z 
 A z-coordinate of 0 is interpreted as the pen being in the up position and a z-coordinate greater then 40 is interpreted as the pen being in the down position.
 
 This tool is command line only. 
-To use it call the script with the filename of your .gcode as the first parameter e.g. -> python DrawGcode.py iit.gcode.
+To use it call the script with the filename of your .gcode as the first parameter e.g. -> python DrawGcode.py example.gcode.
 
 
 
