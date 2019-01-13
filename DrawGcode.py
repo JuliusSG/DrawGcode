@@ -79,6 +79,15 @@ def file_reader(filename):
             plt.plot([x, 0], [y, 0], color=linecolor(pen))
             x = 0
             y = 0
+        elif "M280" in line:
+            if "P0" in line:
+                s = readKey(line, "S")
+                if s >= 40:
+                    pen = True;
+                elif s == 0:
+                    pen = False;
+                else:
+                    syntax_error()
         elif "G1" in line:
             tx = x
             ty = y
@@ -86,14 +95,6 @@ def file_reader(filename):
                 tx = readKey(line, "X")
             if "Y" in line:
                 ty = readKey(line, "Y")
-            if "Z" in line:
-                z = readKey(line, "Z")
-                if z >= 40:
-                    pen = True;
-                elif z == 0:
-                    pen = False;
-                else:
-                    syntax_error()
 
             if x != None and y != None:
                 plt.plot([x, tx], [y, ty], color=linecolor(pen))
