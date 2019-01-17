@@ -63,8 +63,8 @@ def readKey(command, key):
 
 # read a file filename and plot its content
 def file_reader(filename):
-    x = None
-    y = None
+    x = 0
+    y = 0
     pen = False
     print("opening: " + filename)
     try:
