@@ -11,13 +11,13 @@ plt.rcParams['toolbar'] = 'None'  # remove stock matplotlib toolbar
 
 # Author and information
 def print_startup_message():
-    print("DrawGcode by Marcus Voß\nhttps://git.io/fhTYj\n")
+    print("DrawGcode v0.1b by Marcus Voß\nhttps://git.io/fhTYj\n")
     print("--------------------------------------------")
 
 
 # print a syntax error if something cant be interpreted
 def syntax_error():
-    print('\033[91m' + "Error: invalid syntax!" + '\x1b[0m');
+    print("Error: invalid syntax!\n\n");
 
 
 # return the right color based on the pen variable
@@ -57,7 +57,7 @@ def readKey(command, key):
             return -1
         return float(value)
     else:
-        print("'\033[91m'+Error: This should not happen?" + '\x1b[0m')
+        print("ERROR: key:  "+key +" This should not happen?\n\n")
         return -1
 
 
@@ -66,21 +66,26 @@ def file_reader(filename):
     x = 0
     y = 0
     pen = False
-    print("opening: " + filename)
+    print("opening: " + filename + " ...")
     try:
         file = open(filename, "r")
     except IOError:
-        print("Failed to open!")
+        print("ERROR: FAILED TO OPEN THE FILE\n\n")
         return -1
     for line in file:
+        if ";" in line:
+            line = line.split(";")[0]
+        if not line :
+            continue
         print(repr(line))  # print line content including "\n"
+        if line[0] not in ['G','M']:
+            print("WARNING: THE PREVIOUS LINE APPEARS TO BE WRONG OR CONTAINS UNSUPPORTED COMMANDS\n\n")
         if "G28" in line:
-            pen = False #homing also moves up the pen
             plt.plot([x, 0], [y, 0], color=linecolor(pen))
             x = 0
             y = 0
         elif "M280" in line:
-            if "P0" in line:
+            if "P0" in line and "S" in line:
                 s = readKey(line, "S")
                 if s >= 40:
                     pen = True;
@@ -152,7 +157,7 @@ def main():
         filename = sys.argv[1]
         file_reader(filename)
     else:
-        print("Error: Please specify a filename as an argument when running DrawGcode f.e DrawGcode.exe \"filename.gcode\"")
+        print("ERROR: Please specify a filename as an argument when running DrawGcode f.e DrawGcode.exe \"filename.gcode\"")
 
 
 if __name__ == "__main__":
